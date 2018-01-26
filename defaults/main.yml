@@ -13,9 +13,13 @@ karaf_log_path: ${karaf.data}/log/
 
 karaf_logging_template: org.ops4j.pax.logging.cfg
 
-karaf_java_home: /usr/lib/jvm/java-8-openjdk-amd64
+karaf_java_home: "{% if ansible_os_family == 'RedHat' %}/usr/lib/jvm/java-1.8.0-openjdk/{% else %}/usr/lib/jvm/java-8-openjdk-amd64{% endif %}"
 
-karaf_java_packages:
+karaf_java_packages_yum:
+  - java-1.8.0-openjdk
+  - java-1.8.0-openjdk-devel
+
+karaf_java_packages_apt:
   - openjdk-8-jre
   - openjdk-8-jdk
 

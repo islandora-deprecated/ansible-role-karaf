@@ -1,13 +1,21 @@
 ---
 
+- name: Copy setenv script
+  template:
+    src: setenv.j2
+    dest: "{{ karaf_install_symlink }}/bin/setenv"
+    owner: "{{ karaf_user }}"
+    group: "{{ karaf_user }}"
+
 - name: Start Karaf
   shell: >
-    JAVA_HOME={{ karaf_java_home }}
-    KARAF_HOME={{ karaf_install_symlink }}
     {{ karaf_install_symlink }}/bin/start && sleep 5
   args:
     chdir: "{{ karaf_install_symlink }}/bin"
     creates: "{{ karaf_install_symlink }}/bin/karaf-wrapper"
+  environment:
+    JAVA_HOME: "{{ karaf_java_home }}"
+    KARAF_HOME: "{{ karaf_install_symlink }}"
   become_user: "{{ karaf_user }}"
   register: karaf_service_install
 
