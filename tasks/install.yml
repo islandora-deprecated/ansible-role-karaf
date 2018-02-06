@@ -1,10 +1,22 @@
 ---
 
-- name: Make sure java packages are installed
-  apt:
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family}}.yml"
+
+- name: Define karaf_java_home
+  set_fact:
+    karaf_java_home: "{{ __karaf_java_home }}"
+  when: karaf_java_home is not defined
+
+- name: Define karaf_java_packages
+  set_fact:
+    karaf_java_packages: "{{ __karaf_java_packages }}"
+  when: karaf_java_packages is not defined
+
+- name: Install Java packages
+  package:
     name: "{{ karaf_java_packages|join(',') }}"
     state: present
-    update_cache: yes
 
 - name: Expand Karaf Tarball
   unarchive:
@@ -29,4 +41,3 @@
     dest: "{{ karaf_install_symlink }}"
     owner: "{{ karaf_user }}"
     group: "{{ karaf_user }}"
-
