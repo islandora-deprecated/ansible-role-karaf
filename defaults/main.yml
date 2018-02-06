@@ -13,12 +13,10 @@ karaf_log_path: ${karaf.data}/log/
 
 karaf_logging_template: org.ops4j.pax.logging.cfg
 
-karaf_java_home: /usr/lib/jvm/java-8-openjdk-amd64
-
-karaf_java_packages:
-  - java-1.8.0-openjdk
-  - java-1.8.0-openjdk-devel
-
-
-
 karaf_systemd_template: karaf.service
+
+# The following variables have a default value depending on operating system.
+# karaf_java_home: /usr/lib/jvm/java-8-openjdk-amd64
+# karaf_java_packages:
+#   - java-1.8.0-openjdk
+#   - java-1.8.0-openjdk-devel
