@@ -13,9 +13,6 @@
   args:
     chdir: "{{ karaf_install_symlink }}/bin"
     creates: "{{ karaf_install_symlink }}/bin/karaf-wrapper"
-  environment:
-    JAVA_HOME: "{{ karaf_java_home }}"
-    KARAF_HOME: "{{ karaf_install_symlink }}"
   become_user: "{{ karaf_user }}"
   register: karaf_service_install
 
@@ -40,8 +37,6 @@
 
 - name: Stop Karaf
   shell: >
-    JAVA_HOME={{ karaf_java_home }}
-    KARAF_HOME={{ karaf_install_symlink }}
     {{ karaf_install_symlink }}/bin/stop && sleep 1
   args:
     chdir: "{{ karaf_install_symlink }}/bin"

@@ -1,18 +1,12 @@
 ---
 
-- name: Make sure java packages are installed (apt)
-  apt:
-    name: "{{ karaf_java_packages_apt|join(',') }}"
-    state: present
-    update_cache: yes
-  when: ansible_os_family == "Debian"
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family}}.yml"
 
-- name: Make sure java packages are installed (yum)
-  yum:
-    name: "{{ karaf_java_packages_yum|join(',') }}"
+- name: Install Java packages
+  package:
+    name: "{{ karaf_java_packages|join(',') }}"
     state: present
-    update_cache: yes
-  when: ansible_os_family == "RedHat"
 
 - name: Expand Karaf Tarball
   unarchive:
