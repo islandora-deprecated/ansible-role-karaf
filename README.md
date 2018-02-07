@@ -1,4 +1,4 @@
-# Ansible Role: Apache Karaf
+# Ansible Role: Apache Karaf [![Build Status](https://travis-ci.org/Islandora-Devops/ansible-role-karaf.svg?branch=master)](https://travis-ci.org/Islandora-Devops/ansible-role-karaf)
 
 An Ansible role that installs [Karaf](https://karaf.apache.org) in a Tomcat 8 servlet container on:
 

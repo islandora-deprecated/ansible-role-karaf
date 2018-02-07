@@ -13,6 +13,12 @@
     karaf_java_packages: "{{ __karaf_java_packages }}"
   when: karaf_java_packages is not defined
 
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 600
+  when: ansible_os_family == "Debian"
+
 - name: Install Java packages
   package:
     name: "{{ karaf_java_packages|join(',') }}"
