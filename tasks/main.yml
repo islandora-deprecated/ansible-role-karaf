@@ -20,6 +20,11 @@
     - karaf
     - karaf-logging
 
+- include: maven.yml
+  tags:
+    - karaf
+    - karaf-maven
+
 - include: service.yml
   become: yes
   become_user: "{{ karaf_user }}"
